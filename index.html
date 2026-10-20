@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f4f6f0">
+  <meta name="description" content="A selected portfolio of data, AI, and software projects by Dogay Yilmaz.">
+  <title>Dogay Yilmaz / Project Index</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <header class="topbar">
+    <a class="wordmark" href="#top" aria-label="Dogay Yilmaz project index">DY<span>.</span></a>
+    <nav aria-label="Main navigation">
+      <a href="#selected">Selected</a>
+      <a href="#archive">All projects</a>
+    </nav>
+    <a class="github-link" href="https://github.com/dogaygmr" target="_blank" rel="noreferrer">
+      <span>GitHub profile</span><span aria-hidden="true">↗</span>
+    </a>
+  </header>
+
+  <main id="top">
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-copy">
+        <p class="eyebrow"><span class="live-dot"></span> INDEPENDENT PROJECT INDEX <span class="eyebrow-year">/ 2026</span></p>
+        <h1 id="hero-title">Building useful things<br><span>from complex data.</span></h1>
+        <p class="hero-intro">A working archive of experiments in applied AI, data products, analytics, and software. Each project links back to its public source.</p>
+        <a class="text-link" href="#selected">Explore selected work <span aria-hidden="true">↓</span></a>
+      </div>
+      <div class="hero-side">
+        <div class="profile-card">
+          <img src="https://avatars.githubusercontent.com/u/59473763?v=4" alt="Dogay Yilmaz GitHub profile avatar" width="76" height="76">
+          <div>
+            <p class="profile-name">Dogay Yilmaz</p>
+            <p class="profile-meta">Data · AI · Engineering</p>
+          </div>
+          <span class="profile-mark" aria-hidden="true">↗</span>
+        </div>
+        <div class="signal-board" aria-label="Example project workflow: source, retrieve, structure, evaluate">
+          <div class="signal-heading"><span>WORKING PATTERN</span><span>01 — 04</span></div>
+          <div class="signal-flow">
+            <div class="signal-node"><i>01</i><b>Source</b><small>documents</small></div>
+            <span class="signal-line" aria-hidden="true"></span>
+            <div class="signal-node"><i>02</i><b>Retrieve</b><small>relevant context</small></div>
+            <span class="signal-line" aria-hidden="true"></span>
+            <div class="signal-node signal-node-accent"><i>03</i><b>Structure</b><small>usable output</small></div>
+          </div>
+          <div class="signal-foot"><span>RESEARCH → SYSTEMS</span><span class="signal-wave" aria-hidden="true">↗ ↗ ↗</span></div>
+        </div>
+      </div>
+      <div class="hero-index" aria-hidden="true">PORTFOLIO<br>INDEX / 01</div>
+    </section>
+
+    <section class="selected-section" id="selected" aria-labelledby="selected-title">
+      <div class="section-heading">
+        <div><p class="eyebrow">A CLOSER LOOK</p><h2 id="selected-title">Selected work</h2></div>
+        <p class="section-note">Two projects with a clear, documented system story.</p>
+      </div>
+      <div class="feature-grid" id="featured-projects"></div>
+    </section>
+
+    <section class="archive-section" id="archive" aria-labelledby="archive-title">
+      <div class="section-heading archive-heading">
+        <div><p class="eyebrow">PUBLIC REPOSITORIES</p><h2 id="archive-title">The project index</h2></div>
+        <p class="section-note">Descriptions are based on public repository metadata and READMEs. Forks are labeled.</p>
+      </div>
+      <div class="toolbar">
+        <label class="search-box" for="project-search">
+          <span class="search-icon" aria-hidden="true">⌕</span>
+          <input id="project-search" type="search" placeholder="Search projects, topics, languages" autocomplete="off">
+          <kbd>/</kbd>
+        </label>
+        <div class="toolbar-options">
+          <label class="fork-toggle"><input id="include-forks" type="checkbox"><span class="toggle-track" aria-hidden="true"></span><span>Include forks</span></label>
+          <span class="result-count" id="result-count" aria-live="polite"></span>
+        </div>
+      </div>
+      <div class="filter-row" id="category-filters" aria-label="Filter projects by category"></div>
+      <div class="project-grid" id="project-grid"></div>
+      <p class="empty-state" id="empty-state" hidden>No projects match those filters. Try another search.</p>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <a class="wordmark" href="#top">DY<span>.</span></a>
+    <p>Public work, linked at the source.</p>
+    <a href="https://github.com/dogaygmr" target="_blank" rel="noreferrer">github.com/dogaygmr <span aria-hidden="true">↗</span></a>
+  </footer>
+</body>
+</html>
