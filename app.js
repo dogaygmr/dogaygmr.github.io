@@ -249,6 +249,8 @@ const projects = [
 const workspaceProjects = [
   {
     name: "Demand & inventory forecasting",
+    detailId: "workspace-demand-inventory-forecasting",
+    description: "Forecasting workflows for demand and stock planning, with model evaluation and operational reporting.",
     tags: "Time series · XGBoost · Rules",
     structure: "Data acquisition, preparation and feature modules feed a training script, comparison harness and inference/reporting steps.",
     data: "Longitudinal store–product order records with dates, quantities, product and market context. Open order cycles are treated as censored, not as completed targets.",
@@ -259,6 +261,8 @@ const workspaceProjects = [
   },
   {
     name: "Product & market sales forecasts",
+    detailId: "workspace-product-market-sales-forecasts",
+    description: "Monthly and yearly sales forecasting pipelines, including data preparation, model selection, validation, and reporting.",
     tags: "Time series · Model selection · ETL",
     structure: "Separate product/market and short/yearly runners coordinate extraction, candidate-model runs, selection, forecast generation, database handoff and reporting.",
     data: "Monthly product- or market-level sales history with units, value, calendar periods and item attributes; each series is forecast independently or by its configured grouping.",
@@ -269,6 +273,8 @@ const workspaceProjects = [
   },
   {
     name: "Territory & resource planning",
+    detailId: "workspace-territory-resource-planning",
+    description: "Decision-support workflows for territory coverage, resource allocation, scenario comparison, and spreadsheet-based reporting.",
     tags: "Decision support · Rules · Optimization",
     structure: "Layered environment/configuration, imports, preparation, decision logic and a desktop interface; intermediate columnar files and spreadsheet reports connect the stages.",
     data: "Structured activity, sales, product, geography, coverage, capacity and cost observations, reduced to territory/product/specialty summaries.",
@@ -279,6 +285,8 @@ const workspaceProjects = [
   },
   {
     name: "Healthcare segmentation analytics",
+    detailId: "workspace-healthcare-segmentation-analytics",
+    description: "Segmentation and coverage analysis pipelines that combine structured source data with reproducible preparation steps.",
     tags: "Survey analytics · Scoring · Validation",
     structure: "Survey import and validation tools, normalization/mapping helpers, scoring/segmentation logic and workbook/report outputs.",
     data: "Survey-response records joined with categorical attributes and activity summaries; outputs are grouped by segment and reporting dimensions.",
@@ -289,6 +297,8 @@ const workspaceProjects = [
   },
   {
     name: "Customer retention analysis",
+    detailId: "workspace-customer-retention-analysis",
+    description: "Customer activity and retention analysis workflows for identifying behavioral patterns and producing descriptive reports.",
     tags: "Churn · Recency · Rule-based",
     structure: "General and product-level descriptive jobs, a runner, and reporting/logging steps.",
     data: "Dated customer–product transaction histories with numeric quantities, summarized by entity and reporting period.",
@@ -299,6 +309,8 @@ const workspaceProjects = [
   },
   {
     name: "Product performance reporting",
+    detailId: "workspace-product-performance-reporting",
+    description: "Product-focused reporting workflows that turn operational data into structured, reviewable outputs.",
     tags: "Sales analysis · Classical forecasting · Reports",
     structure: "Analysis scripts evaluate forecasts; separate report-generation scripts combine actuals with prepared forecast inputs and format spreadsheet outputs.",
     data: "Daily and monthly product-level unit or value series, with dates and product attributes.",
@@ -309,6 +321,8 @@ const workspaceProjects = [
   },
   {
     name: "Research briefing automation",
+    detailId: "workspace-research-briefing-automation",
+    description: "Automation experiments for gathering, organizing, and distributing concise research and technology briefings.",
     tags: "LLM research · Curation · Email",
     structure: "Topic-specific prompts and editorial scope notes share a scheduled runner, mail utility, sent-link state and logs.",
     data: "Public articles and announcements represented by source links, publication dates and short summaries.",
@@ -318,7 +332,9 @@ const workspaceProjects = [
     pipeline: "Trigger schedule → search public sources → filter duplicates and out-of-scope items → verify and summarize → render HTML/plain text → send once → update sent-link history."
   },
   {
-    name: "Search & content experiments",
+    name: "Social listening workflows",
+    detailId: "workspace-social-listening-workflows",
+    description: "Monitoring and analysis workflows for organizing public conversations and surfacing topic-level signals.",
     tags: "API prototype · LLM drafting · Human review",
     structure: "A small API-inspection notebook sits alongside a separate context-gathering, drafting, validation, rendering and approval workflow.",
     data: "The API prototype handles one domain-level response. The drafting flow uses bounded text context and structured draft/source metadata.",
@@ -329,6 +345,8 @@ const workspaceProjects = [
   },
   {
     name: "SQL data tooling",
+    detailId: "workspace-sql-data-tooling",
+    description: "Reusable database and pipeline utilities for controlled extraction, validation, and reporting.",
     tags: "MCP · Read-only · Query guard",
     structure: "A small MCP server exposes metadata discovery, schema description and guarded query tools, with focused tests and schema documentation.",
     data: "Database metadata plus bounded result sets from caller-provided read-only queries; rows are capped before serialization.",
@@ -361,7 +379,7 @@ const tabButtons = [...document.querySelectorAll("button[data-tab]")];
 const publicPanel = document.querySelector("#public-panel");
 const workspacePanel = document.querySelector("#workspace-panel");
 
-const escapeHtml = (value) => String(value).replace(/[&<>"']/g, (character) => ({
+const escapeHtml = (value) => String(value ?? "").replace(/[&<>"']/g, (character) => ({
   "&": "&amp;", "<": "&lt;", ">": "&gt;", "\"": "&quot;", "'": "&#39;"
 }[character]));
 
@@ -400,11 +418,11 @@ function projectCard(project) {
   const badges = [project.fork ? "FORK" : "", project.featured ? "SELECTED" : ""].filter(Boolean);
   const projectLink = project.url
     ? `<a class="project-open" href="${escapeHtml(project.url)}" target="_blank" rel="noreferrer" aria-label="Open ${escapeHtml(project.name)} on GitHub">↗</a>`
-    : "";
+    : `<a class="project-open" href="#${escapeHtml(project.detailId)}" data-workspace-target="${escapeHtml(project.detailId)}" aria-label="View ${escapeHtml(project.name)} details">↗</a>`;
   return `<article class="project-card">
     <div class="project-card-top"><span class="project-category">${escapeHtml(project.category)}</span><div class="project-card-status"><span class="visibility-badge ${project.visibility === "Private" ? "is-private" : "is-public"}">${escapeHtml(project.visibility || "Public")}</span><span class="project-badges">${badges.map((badge) => `<span class="project-badge">${badge}</span>`).join("")}</span></div></div>
     <div class="project-title-row"><h3>${escapeHtml(project.name)}</h3>${projectLink}</div>
-    <p>${escapeHtml(project.description)}</p>
+    <p>${escapeHtml(project.description || "Project summary is not available yet.")}</p>
     <div class="project-card-bottom"><span>${escapeHtml(project.language)}</span><span>${project.visibility === "Private" ? "WORKSPACE SUMMARY" : dateLabel(project.pushed)}</span></div>
   </article>`;
 }
@@ -418,7 +436,7 @@ function workspaceCard(project) {
     ["Model / rules", project.model],
     ["Pipeline", project.pipeline]
   ];
-  return `<article class="workspace-card">
+  return `<article class="workspace-card" id="${escapeHtml(project.detailId)}">
     <header class="workspace-card-header">
       <div><p class="workspace-label">WORKSPACE NOTE</p><h3>${escapeHtml(project.name)}</h3></div>
       <span class="workspace-tags">${escapeHtml(project.tags)}</span>
@@ -473,6 +491,16 @@ document.querySelector("#category-filters").addEventListener("click", (event) =>
   state.category = button.dataset.category;
   renderFilters();
   renderProjects();
+});
+
+grid.addEventListener("click", (event) => {
+  const link = event.target.closest("a[data-workspace-target]");
+  if (!link) return;
+  event.preventDefault();
+  const targetId = link.dataset.workspaceTarget;
+  setActiveTab("workspace");
+  history.replaceState(null, "", `#${targetId}`);
+  requestAnimationFrame(() => document.getElementById(targetId)?.scrollIntoView({ behavior: "smooth", block: "start" }));
 });
 
 searchInput.addEventListener("input", () => {
