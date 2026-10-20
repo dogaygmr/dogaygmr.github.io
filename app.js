@@ -219,69 +219,99 @@ const projects = [
     fork: false,
     description: "A C++ irrigation-system project.",
     url: "https://github.com/dogaygmr/systeme-of-irrigation"
-  },
+  }
+];
+
+const workspaceProjects = [
   {
     name: "Demand & inventory forecasting",
-    category: "Workspace Summary",
-    language: "Forecasting · ML",
-    sourceLabel: "PRIVATE WORKSPACE SUMMARY",
-    description: "Forecasting workflows for demand and stock planning, with model evaluation and operational reporting. Source code and datasets are not published here."
+    tags: "Time series · XGBoost · Rules",
+    structure: "Data acquisition, preparation and feature modules feed a training script, comparison harness and inference/reporting steps.",
+    data: "Longitudinal store–product order records with dates, quantities, product and market context. Open order cycles are treated as censored, not as completed targets.",
+    eda: "Notebook analysis and validation reports inspect temporal patterns, feature relationships, residuals, product slices and survey comparisons. WAPE complements scale-sensitive error metrics.",
+    features: "Calendar and seasonality signals, recency, rolling order intervals and volumes, order cadence, tenure, promotion ratios, and selected market/location aggregates.",
+    model: "XGBoost regression estimates days until the next order; Optuna tunes selected parameters with time-ordered validation. A separate rules layer translates the day estimate into a stock estimate.",
+    pipeline: "Ingest and cache transactions → clean and build time-safe features → tune/train → evaluate on later periods and survey slices → score → derive stock with business rules → export results."
   },
   {
     name: "Product & market sales forecasts",
-    category: "Workspace Summary",
-    language: "Time series · ETL",
-    sourceLabel: "PRIVATE WORKSPACE SUMMARY",
-    description: "Monthly and yearly sales forecasting pipelines, including data preparation, model selection, validation, and reporting."
+    tags: "Time series · Model selection · ETL",
+    structure: "Separate product/market and short/yearly runners coordinate extraction, candidate-model runs, selection, forecast generation, database handoff and reporting.",
+    data: "Monthly product- or market-level sales history with units, value, calendar periods and item attributes; each series is forecast independently or by its configured grouping.",
+    eda: "Freshness checks, time-based validation windows, model scorecards and error comparisons are built into the run. Broad exploratory analysis is not a separate documented stage.",
+    features: "Period aggregation, forecast horizon and item/market grouping; transformations and candidate-specific inputs are prepared inside each model path.",
+    model: "Candidate families include statistical and ML time-series models, with optional AutoARIMA runs and hybrid/blended model selection. This is trained forecasting, not a hand-coded decision rule.",
+    pipeline: "Check data readiness and run lock → extract and aggregate history → run candidates in isolated chunks → validate and select/blend → refit and forecast → write results and reports."
   },
   {
     name: "Territory & resource planning",
-    category: "Workspace Summary",
-    language: "Analytics · Decision support",
-    sourceLabel: "PRIVATE WORKSPACE SUMMARY",
-    description: "Decision-support workflows for territory coverage, resource allocation, scenario comparison, and spreadsheet-based reporting."
+    tags: "Decision support · Rules · Optimization",
+    structure: "Layered environment/configuration, imports, preparation, decision logic and a desktop interface; intermediate columnar files and spreadsheet reports connect the stages.",
+    data: "Structured activity, sales, product, geography, coverage, capacity and cost observations, reduced to territory/product/specialty summaries.",
+    eda: "Quality checks focus on mapping coverage, missingness, source reconciliation, event-window diagnostics and segment-level return/cost comparisons.",
+    features: "Carry-over and market-share changes, activity continuity, coverage ratios, capacity, expected return and staffing-cost aggregates.",
+    model: "The principal allocation decision is rule-based and scenario-driven; the documented path is not a trained ML predictor.",
+    pipeline: "Import snapshots → normalize and prepare → calculate activity effects and coverage → estimate return/capacity/cost → apply decision rules → preview scenarios and export workbooks."
   },
   {
     name: "Healthcare segmentation analytics",
-    category: "Workspace Summary",
-    language: "Segmentation · Data engineering",
-    sourceLabel: "PRIVATE WORKSPACE SUMMARY",
-    description: "Segmentation and coverage analysis pipelines that combine structured source data with reproducible preparation steps."
+    tags: "Survey analytics · Scoring · Validation",
+    structure: "Survey import and validation tools, normalization/mapping helpers, scoring/segmentation logic and workbook/report outputs.",
+    data: "Survey-response records joined with categorical attributes and activity summaries; outputs are grouped by segment and reporting dimensions.",
+    eda: "Validation scripts check response completeness, question/version alignment, mapping coverage and agreement between survey-derived and aggregate views.",
+    features: "Normalized answers, grouped response rates, potential/engagement indicators and weighted segment summaries.",
+    model: "The current documented engine uses explicit scoring and business rules. Older clustering experiments exist, but their use in the current production flow is not verified.",
+    pipeline: "Import responses and reference extracts → normalize and map questions → validate coverage → compute segment scores → produce validation and result workbooks."
   },
   {
     name: "Customer retention analysis",
-    category: "Workspace Summary",
-    language: "Churn · Analytics",
-    sourceLabel: "PRIVATE WORKSPACE SUMMARY",
-    description: "Customer activity and retention analysis workflows for identifying behavioral patterns and producing descriptive reports."
+    tags: "Churn · Recency · Rule-based",
+    structure: "General and product-level descriptive jobs, a runner, and reporting/logging steps.",
+    data: "Dated customer–product transaction histories with numeric quantities, summarized by entity and reporting period.",
+    eda: "Run-time freshness checks and descriptive counts, recency and period summaries are documented; a separate broad EDA workflow is not.",
+    features: "Time since last event, gaps between events, recent activity windows and historical cadence summaries.",
+    model: "Churn status is assigned using interval/recency rules and configured thresholds; no trained ML classifier is documented for this workflow.",
+    pipeline: "Check reporting window and source freshness → aggregate transaction history → calculate recency/cadence → apply churn rules → export summaries and logs."
   },
   {
     name: "Product performance reporting",
-    category: "Workspace Summary",
-    language: "Reporting · Data products",
-    sourceLabel: "PRIVATE WORKSPACE SUMMARY",
-    description: "Product-focused reporting workflows that turn operational data into structured, reviewable outputs."
+    tags: "Sales analysis · Classical forecasting · Reports",
+    structure: "Analysis scripts evaluate forecasts; separate report-generation scripts combine actuals with prepared forecast inputs and format spreadsheet outputs.",
+    data: "Daily and monthly product-level unit or value series, with dates and product attributes.",
+    eda: "Basic time-series plots, launch/history coverage checks, freshness checks and holdout forecast-error metrics are present; deeper slice analysis varies by report.",
+    features: "Daily-to-monthly aggregation, launch-period filtering and partial-period adjustments for presentation.",
+    model: "Classical forecasting candidates such as ARIMA-family, Prophet and Holt–Winters are compared with time-based validation. Some report inputs come from separate workbooks, so their upstream generation is not fully established.",
+    pipeline: "Load actual series → normalize periods and product history → fit/compare candidate forecasts → combine actuals with supplied forecast outputs → create formatted reports."
   },
   {
     name: "Research briefing automation",
-    category: "Workspace Summary",
-    language: "Automation · LLM",
-    sourceLabel: "PRIVATE WORKSPACE SUMMARY",
-    description: "Automation experiments for gathering, organizing, and distributing concise research and technology briefings."
+    tags: "LLM research · Curation · Email",
+    structure: "Topic-specific prompts and editorial scope notes share a scheduled runner, mail utility, sent-link state and logs.",
+    data: "Public articles and announcements represented by source links, publication dates and short summaries.",
+    eda: "Statistical EDA is not applicable. Editorial checks verify dates/sources, scope fit and duplicate links before inclusion.",
+    features: "Date-window filtering, topic scope, link de-duplication and concise structured summaries.",
+    model: "LLM-assisted web research and summarization with deterministic scope and verification checks; no trained predictive model.",
+    pipeline: "Trigger schedule → search public sources → filter duplicates and out-of-scope items → verify and summarize → render HTML/plain text → send once → update sent-link history."
   },
   {
-    name: "Social listening workflows",
-    category: "Workspace Summary",
-    language: "Text analytics · Monitoring",
-    sourceLabel: "PRIVATE WORKSPACE SUMMARY",
-    description: "Monitoring and analysis workflows for organizing public conversations and surfacing topic-level signals."
+    name: "Search & content experiments",
+    tags: "API prototype · LLM drafting · Human review",
+    structure: "A small API-inspection notebook sits alongside a separate context-gathering, drafting, validation, rendering and approval workflow.",
+    data: "The API prototype handles one domain-level response. The drafting flow uses bounded text context and structured draft/source metadata.",
+    eda: "The API prototype checks response status and connection failures. Draft checks validate length, source presence and privacy patterns; no dataset-level EDA is documented.",
+    features: "Context recency/size limits, output-shape normalization and deterministic content checks; no predictive feature matrix.",
+    model: "The drafting path uses an LLM with rule-based checks and human approval. Automatic public posting is not part of the documented flow.",
+    pipeline: "Probe API or gather permitted context → draft with an LLM → validate content and metadata → render preview → request human approval."
   },
   {
-    name: "SQL Server data tooling",
-    category: "Workspace Summary",
-    language: "SQL · ETL",
-    sourceLabel: "PRIVATE WORKSPACE SUMMARY",
-    description: "Reusable database and pipeline utilities for controlled extraction, validation, and reporting."
+    name: "SQL data tooling",
+    tags: "MCP · Read-only · Query guard",
+    structure: "A small MCP server exposes metadata discovery, schema description and guarded query tools, with focused tests and schema documentation.",
+    data: "Database metadata plus bounded result sets from caller-provided read-only queries; rows are capped before serialization.",
+    eda: "No EDA/model analysis is included. Validation centers on query safety, size hints, row limits, timeouts and serialization behavior.",
+    features: "No ML feature engineering; it normalizes query text and result values for safe tool responses.",
+    model: "Deterministic SQL validation and metadata access only; no ML or LLM model is implemented in the server.",
+    pipeline: "Receive metadata/query request → allow-list the target → validate one read-only statement and scan limits → execute with timeout → cap rows → serialize response."
   }
 ];
 
@@ -289,11 +319,15 @@ const featured = projects.filter((project) => project.featured);
 const categories = ["All", ...new Set(projects.map((project) => project.category))];
 const state = { category: "All", query: "", includeForks: false };
 const grid = document.querySelector("#project-grid");
+const workspaceGrid = document.querySelector("#workspace-grid");
 const featuredGrid = document.querySelector("#featured-projects");
 const count = document.querySelector("#result-count");
 const emptyState = document.querySelector("#empty-state");
 const searchInput = document.querySelector("#project-search");
 const forkToggle = document.querySelector("#include-forks");
+const tabButtons = [...document.querySelectorAll("button[data-tab]")];
+const publicPanel = document.querySelector("#public-panel");
+const workspacePanel = document.querySelector("#workspace-panel");
 
 const escapeHtml = (value) => String(value).replace(/[&<>"']/g, (character) => ({
   "&": "&amp;", "<": "&lt;", ">": "&gt;", "\"": "&quot;", "'": "&#39;"
@@ -343,6 +377,37 @@ function projectCard(project) {
   </article>`;
 }
 
+function workspaceCard(project) {
+  const details = [
+    ["Structure", project.structure],
+    ["Data shape", project.data],
+    ["EDA & validation", project.eda],
+    ["Feature engineering", project.features],
+    ["Model / rules", project.model],
+    ["Pipeline", project.pipeline]
+  ];
+  return `<article class="workspace-card">
+    <header class="workspace-card-header">
+      <div><p class="workspace-label">WORKSPACE NOTE</p><h3>${escapeHtml(project.name)}</h3></div>
+      <span class="workspace-tags">${escapeHtml(project.tags)}</span>
+    </header>
+    <dl class="workspace-details">${details.map(([label, value]) =>
+      `<div class="workspace-detail"><dt>${escapeHtml(label)}</dt><dd>${escapeHtml(value)}</dd></div>`
+    ).join("")}</dl>
+  </article>`;
+}
+
+function setActiveTab(name) {
+  const workspaceActive = name === "workspace";
+  publicPanel.hidden = workspaceActive;
+  workspacePanel.hidden = !workspaceActive;
+  tabButtons.forEach((button) => {
+    const active = button.dataset.tab === name;
+    button.setAttribute("aria-selected", String(active));
+    button.tabIndex = active ? 0 : -1;
+  });
+}
+
 function renderProjects() {
   const visible = projects.filter(matches);
   grid.innerHTML = visible.map(projectCard).join("");
@@ -351,8 +416,24 @@ function renderProjects() {
 }
 
 featuredGrid.innerHTML = featured.map(featureCard).join("");
+workspaceGrid.innerHTML = workspaceProjects.map(workspaceCard).join("");
 renderFilters();
 renderProjects();
+
+tabButtons.forEach((button) => button.addEventListener("click", () => setActiveTab(button.dataset.tab)));
+
+document.querySelectorAll('nav[aria-label="Main navigation"] a').forEach((link) => {
+  link.addEventListener("click", () => setActiveTab("public"));
+});
+
+document.querySelector("nav[aria-label=\"Main navigation\"]").addEventListener("keydown", (event) => {
+  if (!["ArrowLeft", "ArrowRight"].includes(event.key)) return;
+  event.preventDefault();
+  const currentIndex = tabButtons.findIndex((button) => button.getAttribute("aria-selected") === "true");
+  const nextIndex = (currentIndex + (event.key === "ArrowRight" ? 1 : -1) + tabButtons.length) % tabButtons.length;
+  tabButtons[nextIndex].focus();
+  setActiveTab(tabButtons[nextIndex].dataset.tab);
+});
 
 document.querySelector("#category-filters").addEventListener("click", (event) => {
   const button = event.target.closest("button[data-category]");

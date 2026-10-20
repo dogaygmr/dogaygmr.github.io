@@ -9,15 +9,16 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=ml-lifecycle-1">
-  <script src="app.js?v=ml-lifecycle-1" defer></script>
+  <link rel="stylesheet" href="styles.css?v=workspace-details-1">
+  <script src="app.js?v=workspace-details-1" defer></script>
 </head>
 <body>
   <header class="topbar">
     <a class="wordmark" href="#top" aria-label="Dogay Yilmaz project index">DY<span>.</span></a>
     <nav aria-label="Main navigation">
       <a href="#selected">Selected</a>
-      <a href="#archive">All projects</a>
+      <button class="nav-tab" id="public-tab-link" type="button" role="tab" aria-controls="public-panel" aria-selected="true" tabindex="0" data-tab="public">Public projects</button>
+      <button class="nav-tab" id="workspace-tab-link" type="button" role="tab" aria-controls="workspace-panel" aria-selected="false" tabindex="-1" data-tab="workspace">Workspace details</button>
     </nav>
     <a class="github-link" href="https://github.com/dogaygmr" target="_blank" rel="noreferrer">
       <span>GitHub profile</span><span aria-hidden="true">↗</span>
@@ -57,34 +58,47 @@
       <div class="hero-index" aria-hidden="true">PORTFOLIO<br>INDEX / 01</div>
     </section>
 
-    <section class="selected-section" id="selected" aria-labelledby="selected-title">
-      <div class="section-heading">
-        <div><p class="eyebrow">A CLOSER LOOK</p><h2 id="selected-title">Selected work</h2></div>
-        <p class="section-note">Two projects with a clear, documented system story.</p>
-      </div>
-      <div class="feature-grid" id="featured-projects"></div>
-    </section>
+    <div class="tab-panels">
+      <div class="tab-panel" id="public-panel" role="tabpanel" aria-labelledby="public-tab-link" tabindex="0">
+        <section class="selected-section" id="selected" aria-labelledby="selected-title">
+          <div class="section-heading">
+            <div><p class="eyebrow">A CLOSER LOOK</p><h2 id="selected-title">Selected work</h2></div>
+            <p class="section-note">Two projects with a clear, documented system story.</p>
+          </div>
+          <div class="feature-grid" id="featured-projects"></div>
+        </section>
 
-    <section class="archive-section" id="archive" aria-labelledby="archive-title">
-      <div class="section-heading archive-heading">
-        <div><p class="eyebrow">PUBLIC REPOSITORIES + WORKSPACE SUMMARIES</p><h2 id="archive-title">The project index</h2></div>
-        <p class="section-note">Workspace entries are generalized summaries only; no source files, datasets, or organization names are published. Forks are labeled.</p>
+        <section class="archive-section" id="archive" aria-labelledby="archive-title">
+          <div class="section-heading archive-heading">
+            <div><p class="eyebrow">PUBLIC REPOSITORIES</p><h2 id="archive-title">The project index</h2></div>
+            <p class="section-note">Public repository metadata and README-based summaries. Forks are labeled.</p>
+          </div>
+          <div class="toolbar">
+            <label class="search-box" for="project-search">
+              <span class="search-icon" aria-hidden="true">⌕</span>
+              <input id="project-search" type="search" placeholder="Search projects, topics, languages" autocomplete="off">
+              <kbd>/</kbd>
+            </label>
+            <div class="toolbar-options">
+              <label class="fork-toggle"><input id="include-forks" type="checkbox"><span class="toggle-track" aria-hidden="true"></span><span>Include forks</span></label>
+              <span class="result-count" id="result-count" aria-live="polite"></span>
+            </div>
+          </div>
+          <div class="filter-row" id="category-filters" aria-label="Filter projects by category"></div>
+          <div class="project-grid" id="project-grid"></div>
+          <p class="empty-state" id="empty-state" hidden>No projects match those filters. Try another search.</p>
+        </section>
       </div>
-      <div class="toolbar">
-        <label class="search-box" for="project-search">
-          <span class="search-icon" aria-hidden="true">⌕</span>
-          <input id="project-search" type="search" placeholder="Search projects, topics, languages" autocomplete="off">
-          <kbd>/</kbd>
-        </label>
-        <div class="toolbar-options">
-          <label class="fork-toggle"><input id="include-forks" type="checkbox"><span class="toggle-track" aria-hidden="true"></span><span>Include forks</span></label>
-          <span class="result-count" id="result-count" aria-live="polite"></span>
+
+      <section class="workspace-panel" id="workspace-panel" role="tabpanel" aria-labelledby="workspace-tab-link" tabindex="0" hidden>
+        <div class="section-heading workspace-heading">
+          <div><p class="eyebrow">GENERALIZED WORKSPACE NOTES</p><h2 id="workspace-title">How the systems work</h2></div>
+          <p class="section-note">Code-flow summaries only. No database/table identifiers, credentials, organization names, source files, or datasets are included.</p>
         </div>
+        <div class="workspace-grid" id="workspace-grid"></div>
+        <p class="workspace-caveat">Summaries describe local workspace code and documentation. They are not links to public repositories; experimental and rule-based work is labeled as such.</p>
       </div>
-      <div class="filter-row" id="category-filters" aria-label="Filter projects by category"></div>
-      <div class="project-grid" id="project-grid"></div>
-      <p class="empty-state" id="empty-state" hidden>No projects match those filters. Try another search.</p>
-    </section>
+    </div>
   </main>
 
   <footer class="footer">
