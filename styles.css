@@ -47,15 +47,15 @@ h1 span { color: var(--blue); }
 .profile-mark { margin-left: auto; align-self: flex-start; color: var(--blue); font-size: 17px; }
 .signal-board { padding: 18px 19px 15px; border: 1px solid var(--ink); background: var(--ink); color: var(--white); }
 .signal-heading, .signal-foot { display: flex; justify-content: space-between; color: #a7b3aa; font: 9px var(--mono); }
-.signal-heading { padding-bottom: 17px; border-bottom: 1px solid rgba(255,255,255,.16); }
-.signal-flow { min-height: 126px; display: flex; align-items: center; }
-.signal-node { min-width: 83px; display: grid; gap: 6px; }
+.signal-heading { padding-bottom: 12px; border-bottom: 1px solid rgba(255,255,255,.16); }
+.signal-flow { margin: 0; padding: 8px 0 10px; display: grid; list-style: none; }
+.signal-node { position: relative; min-height: 38px; display: grid; grid-template-columns: 22px minmax(0, 1fr); align-items: center; gap: 9px; }
+.signal-node:not(:last-child)::after { content: ""; position: absolute; left: 4px; top: 25px; bottom: -1px; width: 1px; background: #69766d; }
+.signal-node > span { display: grid; gap: 3px; }
 .signal-node i { color: var(--acid); font: normal 9px var(--mono); }
-.signal-node b { font-size: 11px; }
+.signal-node b { font-size: 10px; }
 .signal-node small { color: #9aa69e; font: 8px var(--mono); }
 .signal-node-accent b { color: var(--acid); }
-.signal-line { flex: 1; height: 1px; margin: 0 9px; background: #69766d; position: relative; }
-.signal-line::after { content: ""; position: absolute; right: 0; top: -3px; width: 6px; height: 6px; border-top: 1px solid var(--acid); border-right: 1px solid var(--acid); transform: rotate(45deg); }
 .signal-foot { padding-top: 12px; border-top: 1px solid rgba(255,255,255,.16); }
 .signal-wave { color: var(--acid); letter-spacing: 3px; }
 .hero-index { position: absolute; z-index: 1; right: 4.2vw; bottom: 21px; color: #88948b; font: 8px/1.7 var(--mono); text-align: right; }
