@@ -249,6 +249,7 @@ const projects = [
 const workspaceProjects = [
   {
     name: "Demand & inventory forecasting",
+    pushed: "2026-08-01",
     detailId: "workspace-demand-inventory-forecasting",
     description: "Forecasting workflows for demand and stock planning, with model evaluation and operational reporting.",
     tags: "Time series · XGBoost · Rules",
@@ -261,6 +262,7 @@ const workspaceProjects = [
   },
   {
     name: "Product & market sales forecasts",
+    pushed: "2026-08-01",
     detailId: "workspace-product-market-sales-forecasts",
     description: "Monthly and yearly sales forecasting pipelines, including data preparation, model selection, validation, and reporting.",
     tags: "Time series · Model selection · ETL",
@@ -273,6 +275,7 @@ const workspaceProjects = [
   },
   {
     name: "Territory & resource planning",
+    pushed: "2026-08-01",
     detailId: "workspace-territory-resource-planning",
     description: "Decision-support workflows for territory coverage, resource allocation, scenario comparison, and spreadsheet-based reporting.",
     tags: "Decision support · Rules · Optimization",
@@ -285,6 +288,7 @@ const workspaceProjects = [
   },
   {
     name: "Healthcare segmentation analytics",
+    pushed: "2026-08-01",
     detailId: "workspace-healthcare-segmentation-analytics",
     description: "Segmentation and coverage analysis pipelines that combine structured source data with reproducible preparation steps.",
     tags: "Survey analytics · Scoring · Validation",
@@ -297,6 +301,7 @@ const workspaceProjects = [
   },
   {
     name: "Customer retention analysis",
+    pushed: "2026-08-01",
     detailId: "workspace-customer-retention-analysis",
     description: "Customer activity and retention analysis workflows for identifying behavioral patterns and producing descriptive reports.",
     tags: "Churn · Recency · Rule-based",
@@ -309,6 +314,7 @@ const workspaceProjects = [
   },
   {
     name: "Product performance reporting",
+    pushed: "2026-08-01",
     detailId: "workspace-product-performance-reporting",
     description: "Product-focused reporting workflows that turn operational data into structured, reviewable outputs.",
     tags: "Sales analysis · Classical forecasting · Reports",
@@ -321,6 +327,7 @@ const workspaceProjects = [
   },
   {
     name: "Research briefing automation",
+    pushed: "2026-08-01",
     detailId: "workspace-research-briefing-automation",
     description: "Automation experiments for gathering, organizing, and distributing concise research and technology briefings.",
     tags: "LLM research · Curation · Email",
@@ -333,6 +340,7 @@ const workspaceProjects = [
   },
   {
     name: "Social listening workflows",
+    pushed: "2026-08-01",
     detailId: "workspace-social-listening-workflows",
     description: "Monitoring and analysis workflows for organizing public conversations and surfacing topic-level signals.",
     tags: "API prototype · LLM drafting · Human review",
@@ -345,6 +353,7 @@ const workspaceProjects = [
   },
   {
     name: "SQL data tooling",
+    pushed: "2026-08-01",
     detailId: "workspace-sql-data-tooling",
     description: "Reusable database and pipeline utilities for controlled extraction, validation, and reporting.",
     tags: "MCP · Read-only · Query guard",
@@ -424,7 +433,7 @@ function projectCard(project) {
     <div class="project-card-top"><span class="project-category">${escapeHtml(project.category)}</span><div class="project-card-status"><span class="visibility-badge ${project.visibility === "Private" ? "is-private" : "is-public"}">${escapeHtml(project.visibility || "Public")}</span><span class="project-badges">${badges.map((badge) => `<span class="project-badge">${badge}</span>`).join("")}</span></div></div>
     <div class="project-title-row"><h3>${escapeHtml(project.name)}</h3>${projectLink}</div>
     <p>${escapeHtml(project.description || "Project summary is not available yet.")}</p>
-    <div class="project-card-bottom"><span>${escapeHtml(project.language)}</span><span>${project.visibility === "Private" ? "WORKSPACE SUMMARY" : dateLabel(project.pushed)}</span></div>
+    <div class="project-card-bottom"><span>${escapeHtml(project.language)}</span><span>${dateLabel(project.pushed)}</span></div>
   </article>`;
 }
 
