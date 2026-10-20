@@ -116,6 +116,8 @@ h2 { margin: 0; font-size: 34px; line-height: 1.2; font-weight: 700; letter-spac
 .search-box input::placeholder { color: #8c988f; }
 kbd { padding: 3px 6px; border: 1px solid var(--line); color: var(--muted); font: 10px var(--mono); }
 .toolbar-options { display: flex; align-items: center; gap: 20px; }
+.sort-control { display: inline-flex; align-items: center; gap: 8px; color: #536057; font-size: 11px; white-space: nowrap; }
+.sort-control select { min-height: 34px; padding: 0 28px 0 9px; border: 1px solid #c8d0c5; border-radius: 0; background: var(--white); color: var(--ink); cursor: pointer; font: 10px var(--mono); }
 .fork-toggle { display: inline-flex; align-items: center; gap: 9px; color: #536057; cursor: pointer; font-size: 11px; white-space: nowrap; }
 .fork-toggle input { position: absolute; width: 1px; height: 1px; opacity: 0; }
 .toggle-track { width: 30px; height: 17px; padding: 2px; display: block; border: 1px solid #a8b2a8; background: #d9dfd6; transition: background .2s; }

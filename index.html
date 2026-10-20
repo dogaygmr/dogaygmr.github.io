@@ -80,6 +80,12 @@
               <kbd>/</kbd>
             </label>
             <div class="toolbar-options">
+              <label class="sort-control" for="project-sort"><span>Sort</span>
+                <select id="project-sort" aria-label="Sort projects by update date">
+                  <option value="newest">Newest first</option>
+                  <option value="oldest">Oldest first</option>
+                </select>
+              </label>
               <label class="fork-toggle"><input id="include-forks" type="checkbox" checked><span class="toggle-track" aria-hidden="true"></span><span>Include forks</span></label>
               <span class="result-count" id="result-count" aria-live="polite"></span>
             </div>

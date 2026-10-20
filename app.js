@@ -367,7 +367,7 @@ projects.push(...workspaceProjects.map((project) => ({
 
 const featured = projects.filter((project) => project.featured);
 const categories = ["All", ...new Set(projects.map((project) => project.category))];
-const state = { category: "All", query: "", includeForks: true };
+const state = { category: "All", query: "", includeForks: true, sort: "newest" };
 const grid = document.querySelector("#project-grid");
 const workspaceGrid = document.querySelector("#workspace-grid");
 const featuredGrid = document.querySelector("#featured-projects");
@@ -375,6 +375,7 @@ const count = document.querySelector("#result-count");
 const emptyState = document.querySelector("#empty-state");
 const searchInput = document.querySelector("#project-search");
 const forkToggle = document.querySelector("#include-forks");
+const sortSelect = document.querySelector("#project-sort");
 const tabButtons = [...document.querySelectorAll("button[data-tab]")];
 const publicPanel = document.querySelector("#public-panel");
 const workspacePanel = document.querySelector("#workspace-panel");
@@ -459,7 +460,17 @@ function setActiveTab(name) {
 }
 
 function renderProjects() {
-  const visible = projects.filter(matches);
+  const visible = projects
+    .filter(matches)
+    .map((project, index) => ({ project, index, timestamp: Date.parse(project.pushed || "") }))
+    .sort((a, b) => {
+      const aHasDate = Number.isFinite(a.timestamp);
+      const bHasDate = Number.isFinite(b.timestamp);
+      if (aHasDate !== bHasDate) return aHasDate ? -1 : 1;
+      if (!aHasDate) return a.index - b.index;
+      return state.sort === "oldest" ? a.timestamp - b.timestamp : b.timestamp - a.timestamp;
+    })
+    .map(({ project }) => project);
   grid.innerHTML = visible.map(projectCard).join("");
   count.textContent = `${visible.length} / ${projects.length}`;
   emptyState.hidden = visible.length !== 0;
@@ -510,6 +521,11 @@ searchInput.addEventListener("input", () => {
 
 forkToggle.addEventListener("change", () => {
   state.includeForks = forkToggle.checked;
+  renderProjects();
+});
+
+sortSelect.addEventListener("change", () => {
+  state.sort = sortSelect.value;
   renderProjects();
 });
 
