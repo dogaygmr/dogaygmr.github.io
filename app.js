@@ -219,6 +219,69 @@ const projects = [
     fork: false,
     description: "A C++ irrigation-system project.",
     url: "https://github.com/dogaygmr/systeme-of-irrigation"
+  },
+  {
+    name: "Demand & inventory forecasting",
+    category: "Workspace Summary",
+    language: "Forecasting · ML",
+    sourceLabel: "PRIVATE WORKSPACE SUMMARY",
+    description: "Forecasting workflows for demand and stock planning, with model evaluation and operational reporting. Source code and datasets are not published here."
+  },
+  {
+    name: "Product & market sales forecasts",
+    category: "Workspace Summary",
+    language: "Time series · ETL",
+    sourceLabel: "PRIVATE WORKSPACE SUMMARY",
+    description: "Monthly and yearly sales forecasting pipelines, including data preparation, model selection, validation, and reporting."
+  },
+  {
+    name: "Territory & resource planning",
+    category: "Workspace Summary",
+    language: "Analytics · Decision support",
+    sourceLabel: "PRIVATE WORKSPACE SUMMARY",
+    description: "Decision-support workflows for territory coverage, resource allocation, scenario comparison, and spreadsheet-based reporting."
+  },
+  {
+    name: "Healthcare segmentation analytics",
+    category: "Workspace Summary",
+    language: "Segmentation · Data engineering",
+    sourceLabel: "PRIVATE WORKSPACE SUMMARY",
+    description: "Segmentation and coverage analysis pipelines that combine structured source data with reproducible preparation steps."
+  },
+  {
+    name: "Customer retention analysis",
+    category: "Workspace Summary",
+    language: "Churn · Analytics",
+    sourceLabel: "PRIVATE WORKSPACE SUMMARY",
+    description: "Customer activity and retention analysis workflows for identifying behavioral patterns and producing descriptive reports."
+  },
+  {
+    name: "Product performance reporting",
+    category: "Workspace Summary",
+    language: "Reporting · Data products",
+    sourceLabel: "PRIVATE WORKSPACE SUMMARY",
+    description: "Product-focused reporting workflows that turn operational data into structured, reviewable outputs."
+  },
+  {
+    name: "Research briefing automation",
+    category: "Workspace Summary",
+    language: "Automation · LLM",
+    sourceLabel: "PRIVATE WORKSPACE SUMMARY",
+    description: "Automation experiments for gathering, organizing, and distributing concise research and technology briefings."
+  },
+  {
+    name: "Social listening workflows",
+    category: "Workspace Summary",
+    language: "Text analytics · Monitoring",
+    sourceLabel: "PRIVATE WORKSPACE SUMMARY",
+    description: "Monitoring and analysis workflows for organizing public conversations and surfacing topic-level signals."
+  },
+  {
+    name: "SQL Server data tooling",
+    category: "Workspace Summary",
+    language: "SQL · ETL",
+    sourceLabel: "PRIVATE WORKSPACE SUMMARY",
+    description: "Reusable database and pipeline utilities for controlled extraction, validation, and reporting."
   }
 ];
 
@@ -268,12 +331,15 @@ function matches(project) {
 }
 
 function projectCard(project) {
-  const badges = [project.fork ? "FORK" : "", project.featured ? "SELECTED" : ""].filter(Boolean);
+  const badges = [project.fork ? "FORK" : "", project.featured ? "SELECTED" : "", project.sourceLabel || ""].filter(Boolean);
+  const projectLink = project.url
+    ? `<a class="project-open" href="${escapeHtml(project.url)}" target="_blank" rel="noreferrer" aria-label="Open ${escapeHtml(project.name)} on GitHub">↗</a>`
+    : "";
   return `<article class="project-card">
     <div class="project-card-top"><span class="project-category">${escapeHtml(project.category)}</span><span class="project-badges">${badges.map((badge) => `<span class="project-badge">${badge}</span>`).join("")}</span></div>
-    <div class="project-title-row"><h3>${escapeHtml(project.name)}</h3><a class="project-open" href="${escapeHtml(project.url)}" target="_blank" rel="noreferrer" aria-label="Open ${escapeHtml(project.name)} on GitHub">↗</a></div>
+    <div class="project-title-row"><h3>${escapeHtml(project.name)}</h3>${projectLink}</div>
     <p>${escapeHtml(project.description)}</p>
-    <div class="project-card-bottom"><span>${escapeHtml(project.language)}</span><span>${dateLabel(project.pushed)}</span></div>
+    <div class="project-card-bottom"><span>${escapeHtml(project.language)}</span><span>${project.sourceLabel || dateLabel(project.pushed)}</span></div>
   </article>`;
 }
 
