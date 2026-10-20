@@ -133,6 +133,10 @@ kbd { padding: 3px 6px; border: 1px solid var(--line); color: var(--muted); font
 .project-card:hover { border-color: #8c9b90; background: var(--white); }
 .project-card-top { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
 .project-category { color: var(--blue); font: 8px var(--mono); text-transform: uppercase; }
+.project-card-status { display: flex; align-items: center; justify-content: flex-end; gap: 5px; flex-wrap: wrap; }
+.visibility-badge { padding: 3px 6px; border: 1px solid; font: 8px var(--mono); text-transform: uppercase; }
+.visibility-badge.is-public { border-color: #b8c8a1; background: #f1f6e9; color: #536c31; }
+.visibility-badge.is-private { border-color: #bdc9e9; background: #eef2fc; color: #405b9f; }
 .project-badges { display: flex; gap: 5px; }
 .project-badge { padding: 3px 5px; border: 1px solid #d4dacf; color: #758178; font: 8px var(--mono); }
 .project-title-row { margin-top: 13px; display: flex; align-items: start; justify-content: space-between; gap: 10px; }

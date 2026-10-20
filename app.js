@@ -2,6 +2,7 @@ const projects = [
   {
     name: "worker-cv-parser-rag",
     category: "Applied AI",
+    visibility: "Public",
     language: "Python",
     pushed: "2026-02-03",
     fork: false,
@@ -13,6 +14,7 @@ const projects = [
   {
     name: "Sirket-Tekillestirme",
     category: "Applied AI",
+    visibility: "Public",
     language: "HTML",
     pushed: "2026-01-30",
     fork: false,
@@ -24,6 +26,7 @@ const projects = [
   {
     name: "PIPELINE-DE-TRAITEMENT-DE-DONNEES",
     category: "Data & Analytics",
+    visibility: "Public",
     language: "Repository metadata",
     pushed: "2024-02-02",
     fork: false,
@@ -33,6 +36,7 @@ const projects = [
   {
     name: "Recommendation-System",
     category: "Applied AI",
+    visibility: "Public",
     language: "Repository metadata",
     pushed: "2025-04-14",
     fork: false,
@@ -42,6 +46,7 @@ const projects = [
   {
     name: "rag-tutorial-v2",
     category: "Applied AI",
+    visibility: "Public",
     language: "Repository metadata",
     pushed: "2024-08-03",
     fork: true,
@@ -51,6 +56,7 @@ const projects = [
   {
     name: "Urban-Mobility-Analysis",
     category: "Data & Analytics",
+    visibility: "Public",
     language: "TeX",
     pushed: "2024-02-02",
     fork: false,
@@ -60,6 +66,7 @@ const projects = [
   {
     name: "pred-of-medecine-consumption",
     category: "Data & Analytics",
+    visibility: "Public",
     language: "Jupyter Notebook",
     pushed: "2023-10-25",
     fork: false,
@@ -69,6 +76,7 @@ const projects = [
   {
     name: "Data-Structures-and-Algorithms",
     category: "Software & Learning",
+    visibility: "Public",
     language: "TeX",
     pushed: "2023-10-05",
     fork: false,
@@ -78,6 +86,7 @@ const projects = [
   {
     name: "Wtag",
     category: "Software & Learning",
+    visibility: "Public",
     language: "Repository metadata",
     pushed: "2023-09-28",
     fork: false,
@@ -87,6 +96,7 @@ const projects = [
   {
     name: "Customer-Churn",
     category: "Data & Analytics",
+    visibility: "Public",
     language: "Jupyter Notebook",
     pushed: "2023-05-07",
     fork: false,
@@ -96,6 +106,7 @@ const projects = [
   {
     name: "taskforce-platform",
     category: "Software & Learning",
+    visibility: "Public",
     language: "Repository metadata",
     pushed: "2023-09-21",
     fork: false,
@@ -106,6 +117,7 @@ const projects = [
   {
     name: "GA-mutation-paralellisation",
     category: "Software & Learning",
+    visibility: "Public",
     language: "Python",
     pushed: "2023-02-08",
     fork: false,
@@ -115,6 +127,7 @@ const projects = [
   {
     name: "Application-de-BigQuery",
     category: "Data & Analytics",
+    visibility: "Public",
     language: "Repository metadata",
     pushed: "2023-02-08",
     fork: false,
@@ -124,6 +137,7 @@ const projects = [
   {
     name: "Rezervasyon-Sistemi-Fizibilite-Calismasi",
     category: "Software & Learning",
+    visibility: "Public",
     language: "Repository metadata",
     pushed: "2023-02-08",
     fork: false,
@@ -133,6 +147,7 @@ const projects = [
   {
     name: "Hasta-Takip-Sistemi",
     category: "Software & Learning",
+    visibility: "Public",
     language: "Repository metadata",
     pushed: "2023-02-08",
     fork: false,
@@ -142,6 +157,7 @@ const projects = [
   {
     name: "Liman-MYS-Eklenti-Gelistirme",
     category: "Software & Learning",
+    visibility: "Public",
     language: "PHP",
     pushed: "2022-01-27",
     fork: false,
@@ -151,6 +167,7 @@ const projects = [
   {
     name: "Societe-d-Enregistrement-DataBase",
     category: "Data & Analytics",
+    visibility: "Public",
     language: "SQL",
     pushed: "2022-01-27",
     fork: false,
@@ -160,6 +177,7 @@ const projects = [
   {
     name: "Encryption-Project",
     category: "Software & Learning",
+    visibility: "Public",
     language: "Jupyter Notebook",
     pushed: "2022-01-27",
     fork: false,
@@ -169,6 +187,7 @@ const projects = [
   {
     name: "Diabetes-Prediction",
     category: "Data & Analytics",
+    visibility: "Public",
     language: "Jupyter Notebook",
     pushed: "2022-01-27",
     fork: false,
@@ -178,6 +197,7 @@ const projects = [
   {
     name: "havelsan-tech.-camp",
     category: "Software & Learning",
+    visibility: "Public",
     language: "Shell",
     pushed: "2021-09-09",
     fork: false,
@@ -187,6 +207,7 @@ const projects = [
   {
     name: "teknolojikampi2021",
     category: "Software & Learning",
+    visibility: "Public",
     language: "Repository metadata",
     pushed: "2021-09-09",
     fork: true,
@@ -196,6 +217,7 @@ const projects = [
   {
     name: "game",
     category: "Software & Learning",
+    visibility: "Public",
     language: "Python",
     pushed: "2021-09-09",
     fork: false,
@@ -205,6 +227,7 @@ const projects = [
   {
     name: "Author-predict-code",
     category: "Applied AI",
+    visibility: "Public",
     language: "Repository metadata",
     pushed: "2020-06-28",
     fork: true,
@@ -214,6 +237,7 @@ const projects = [
   {
     name: "systeme-of-irrigation",
     category: "Software & Learning",
+    visibility: "Public",
     language: "C++",
     pushed: "2021-01-07",
     fork: false,
@@ -315,9 +339,17 @@ const workspaceProjects = [
   }
 ];
 
+projects.push(...workspaceProjects.map((project) => ({
+  ...project,
+  category: "Workspace Summary",
+  language: project.tags,
+  visibility: "Private",
+  sourceLabel: "PRIVATE WORKSPACE SUMMARY"
+})));
+
 const featured = projects.filter((project) => project.featured);
 const categories = ["All", ...new Set(projects.map((project) => project.category))];
-const state = { category: "All", query: "", includeForks: false };
+const state = { category: "All", query: "", includeForks: true };
 const grid = document.querySelector("#project-grid");
 const workspaceGrid = document.querySelector("#workspace-grid");
 const featuredGrid = document.querySelector("#featured-projects");
@@ -365,15 +397,15 @@ function matches(project) {
 }
 
 function projectCard(project) {
-  const badges = [project.fork ? "FORK" : "", project.featured ? "SELECTED" : "", project.sourceLabel || ""].filter(Boolean);
+  const badges = [project.fork ? "FORK" : "", project.featured ? "SELECTED" : ""].filter(Boolean);
   const projectLink = project.url
     ? `<a class="project-open" href="${escapeHtml(project.url)}" target="_blank" rel="noreferrer" aria-label="Open ${escapeHtml(project.name)} on GitHub">↗</a>`
     : "";
   return `<article class="project-card">
-    <div class="project-card-top"><span class="project-category">${escapeHtml(project.category)}</span><span class="project-badges">${badges.map((badge) => `<span class="project-badge">${badge}</span>`).join("")}</span></div>
+    <div class="project-card-top"><span class="project-category">${escapeHtml(project.category)}</span><div class="project-card-status"><span class="visibility-badge ${project.visibility === "Private" ? "is-private" : "is-public"}">${escapeHtml(project.visibility || "Public")}</span><span class="project-badges">${badges.map((badge) => `<span class="project-badge">${badge}</span>`).join("")}</span></div></div>
     <div class="project-title-row"><h3>${escapeHtml(project.name)}</h3>${projectLink}</div>
     <p>${escapeHtml(project.description)}</p>
-    <div class="project-card-bottom"><span>${escapeHtml(project.language)}</span><span>${project.sourceLabel || dateLabel(project.pushed)}</span></div>
+    <div class="project-card-bottom"><span>${escapeHtml(project.language)}</span><span>${project.visibility === "Private" ? "WORKSPACE SUMMARY" : dateLabel(project.pushed)}</span></div>
   </article>`;
 }
 
